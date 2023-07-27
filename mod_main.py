@@ -1,8 +1,5 @@
 from datetime import datetime
 import os
-import urllib
-import zlib
-import requests
 from tool import ToolUtil
 from flask import Response
 from .setup import *
