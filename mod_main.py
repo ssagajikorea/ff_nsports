@@ -5,13 +5,13 @@ from flask import Response
 from .setup import *
 
 try:
-    if os.path.exists(os.path.join(os.path.dirname(__file__), "souce_nsports_handler.py")):
-        from .souce_nsports_handler import NSPORTS_Handler
+    if os.path.exists(os.path.join(os.path.dirname(__file__), "source_nsports_handler.py")):
+        from .source_nsports_handler import NSPORTS_Handler
 
     else:
         from support import SupportSC
 
-        NSPORTS_Handler = SupportSC.load_module_f(__file__, "souce_nsports_handler").NSPORTS_Handler
+        NSPORTS_Handler = SupportSC.load_module_f(__file__, "source_nsports_handler").NSPORTS_Handler
 except:
     pass
 
