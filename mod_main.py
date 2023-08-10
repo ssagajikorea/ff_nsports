@@ -37,6 +37,7 @@ class ModuleMain(PluginModuleBase):
         arg = P.ModelSetting.to_dict()
         arg["api_m3u"] = ToolUtil.make_apikey_url(f"/{P.package_name}/api/m3u")
         arg["api_yaml"] = ToolUtil.make_apikey_url(f"/{P.package_name}/api/yaml")
+        arg["hls_playback"] = "https://chrome.google.com/webstore/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
         if sub == "setting":
             arg["is_include"] = F.scheduler.is_include(self.get_scheduler_name())
             arg["is_running"] = F.scheduler.is_running(self.get_scheduler_name())
@@ -52,18 +53,19 @@ class ModuleMain(PluginModuleBase):
         elif command == "schedule_esports_list":
             return jsonify({"list": NSPORTS_Handler.schedule_esports_list(), "updated_at": updated_at})
         elif command == "play_url":
-            url = ToolUtil.make_apikey_url(f"/{P.package_name}/api/url.m3u8?ch_id={arg1}")
-            ret = {"ret": "success", "data": url, "title": arg2}
+            streaming_type = P.ModelSetting.get("streaming_type")
+            url = arg1
+            if streaming_type == "redirect":
+                url = NSPORTS_Handler.play_url(url)
+            ret = {"ret": "success", "data": url}
         return jsonify(ret)
 
     def process_api(self, sub, req):
         try:
             if sub == "m3u":
-                data = NSPORTS_Handler.make_m3u()
-                return Response(data, headers={"Content-Type": "text/plain; charset=utf-8"})
+                return NSPORTS_Handler.make_m3u()
             elif sub == "yaml":
-                data = NSPORTS_Handler.make_yaml()
-                return Response(data, headers={"Content-Type": "text/yaml; charset=utf-8"})
+                return NSPORTS_Handler.make_yaml()
             elif sub == "url.m3u8":
                 return NSPORTS_Handler.url_m3u8(req)
             elif sub == "play":

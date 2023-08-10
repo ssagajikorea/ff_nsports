@@ -14,6 +14,8 @@
 <form id='setting' name='setting'>
   <div class="tab-content" id="nav-tabContent">
     {{ macros.m_tab_content_start('normal', true) }}
+    {{ macros.info_text_go('hls_playback', 'Native HLS Playback', value=arg['hls_playback'], desc=['웹에서 사용시 크롬확장프로그램 설치하세요']) }}
+    {{ macros.m_hr() }}
     {{ macros.setting_checkbox('use_sports', '스포츠', value=arg['use_sports']) }}
     {{ macros.setting_checkbox('use_esports', 'e스포츠', value=arg['use_esports']) }}
     {{ macros.setting_select('use_quality', '화질', [['1920x1080','1080p'], ['1280x720','720p'], ['854x480', '480p'], ['640x360', '360p']],
