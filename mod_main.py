@@ -31,6 +31,9 @@ class ModuleMain(PluginModuleBase):
             "use_esports": "False",
             "use_quality": "1920x1080",
             "streaming_type": "redirect",
+            "use_proxy": "False",
+            "use_proxy2": "False",
+            "proxy_url": "",
         }
 
     def process_menu(self, sub, req):

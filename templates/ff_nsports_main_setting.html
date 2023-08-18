@@ -24,6 +24,9 @@
     'Redirect'], ['direct',
     'Direct'] ], value=arg['streaming_type'], desc=[' - Redirect: 가장 좋지만 Player에 따라 10분 후 중지될 수 있습니다. 중지가 안된다면 이
     방법으로 사용하세요. 동일 네트워크의 Tvheadend에 연결할 때 사용합니다.', '- Direct: FF와 Player가 동일 네트워크 일 때 사용합니다. Proxy 옵션보다 성능이 좋습니다.',' - Proxy: 불가...']) }}
+    {{ macros.setting_checkbox('use_proxy', 'Proxy1 사용', value=arg['use_proxy'], desc=['URL을 얻을 때만 사용']) }}
+    {{ macros.setting_checkbox('use_proxy2', 'Proxy2 재생시 사용', value=arg['use_proxy2'], desc=['Direct, Proxy 사용시']) }}
+    {{ macros.setting_input_text('proxy_url', 'Proxy URL', value=arg['proxy_url'], desc=['http://id:pass@ip:port or http://ip:port']) }}
     {{ macros.m_tab_content_end() }}
 
     {{ macros.m_tab_content_start('api', false) }}
